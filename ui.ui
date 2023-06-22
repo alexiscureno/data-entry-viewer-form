@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>650</width>
-    <height>322</height>
+    <width>606</width>
+    <height>342</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -29,7 +29,28 @@
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout">
            <item>
-            <widget class="QTableWidget" name="tableWidget"/>
+            <widget class="QTableWidget" name="tableWidget">
+             <column>
+              <property name="text">
+               <string>Name</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Age</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Subscription</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>Employment</string>
+              </property>
+             </column>
+            </widget>
            </item>
           </layout>
          </item>
@@ -204,7 +225,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>650</width>
+     <width>606</width>
      <height>21</height>
     </rect>
    </property>
