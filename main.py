@@ -1,18 +1,19 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QPushButton, QLineEdit, QDialog, QSpinBox, QComboBox, QCheckBox, \
-    QMainWindow, QAction, QTableWidget, QFileDialog, QMenuBar, QTableWidgetItem, QWidgetAction
+    QMainWindow, QAction, QTableWidget, QFileDialog, QMenuBar, QTableWidgetItem, QWidgetAction, QMessageBox
 from PyQt5 import uic
 import openpyxl
 from openpyxl import Workbook
 from openpyxl.utils import get_column_letter
 import pandas as pd
+import qdarktheme
 
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         uic.loadUi('ui.ui', self)
-
+        qdarktheme.setup_theme()
         self.file_path = None
 
         # Widgets
@@ -48,25 +49,35 @@ class MainWindow(QMainWindow):
         self.table_widget = self.findChild(QTableWidget, 'tableWidget')
 
     def insert_data(self):
-        name = self.name_ln.text()
-        age = self.age_box.value()
-        sub = self.sus_box.currentText()
-        if self.employ_box.isChecked():
-            employ = "Employed"
+
+        if self.file_path:
+
+            name = self.name_ln.text()
+            age = self.age_box.value()
+            sub = self.sus_box.currentText()
+            if self.employ_box.isChecked():
+                employ = "Employed"
+            else:
+                employ = "Unemployed"
+
+            if name.isalpha() and name and age > 0 and sub:
+
+                self.add_data_to_excel(self.file_path, name, age, sub, employ)
+                self.add_data_to_table(name, age, sub, employ)
+
+                self.name_ln.clear()
+                self.age_box.setValue(self.age_box.minimum())
+                self.sus_box.setCurrentIndex(-1)
+                self.employ_box.setChecked(False)
+            else:
+                QMessageBox.warning(self, "Invalid Input",
+                                    "Please enter a valid name (letters only) and a positive age.")
         else:
-            employ = "Unemployed"
-
-        self.add_data_to_excel(self.file_path, name, age, sub, employ)
-
-        self.add_data_to_table(name, age, sub, employ)
-        #self.load_data(self.file_path)
-
-        self.name_ln.clear()
-        self.age_box.setValue(self.age_box.minimum())
-        self.sus_box.setCurrentIndex(-1)
-        self.employ_box.setChecked(False)
-
-
+            QMessageBox.warning(self, "No File Selected", "Please create or open a file before inserting data.")
+            self.name_ln.clear()
+            self.age_box.setValue(self.age_box.minimum())
+            self.sus_box.setCurrentIndex(-1)
+            self.employ_box.setChecked(False)
 
     def add_data_to_excel(self, file_path, name, age, sub, employ):
         # Open the existing workbook
