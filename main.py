@@ -1,6 +1,7 @@
 import sys
 from PyQt5.QtWidgets import QApplication, QPushButton, QLineEdit, QDialog, QSpinBox, QComboBox, QCheckBox, \
-    QMainWindow, QAction, QTableWidget, QFileDialog, QMenuBar, QTableWidgetItem, QWidgetAction, QMessageBox
+    QMainWindow, QAction, QTableWidget, QFileDialog, QMenuBar, QTableWidgetItem, QWidgetAction, QMessageBox, \
+    QRadioButton
 from PyQt5 import uic
 import openpyxl
 from openpyxl import Workbook
@@ -41,12 +42,23 @@ class MainWindow(QMainWindow):
         self.insert_btn = self.findChild(QPushButton, "pushButton")
         self.insert_btn.clicked.connect(self.insert_data)
 
+        # Radio Buttons
+        self.dark_mode = self.findChild(QRadioButton, "radioButton")
+        self.dark_mode.toggled.connect(self.set_dark_mode)
+
+        self.light_mode = self.findChild(QRadioButton, "radioButton_2")
+        self.light_mode.toggled.connect(self.set_light_mode)
+
         # Actions menu bar
         self.new_file_bar.triggered.connect(self.new_file)
         self.open_file_bar.triggered.connect(self.open_file)
 
         # Table Widget
         self.table_widget = self.findChild(QTableWidget, 'tableWidget')
+    def set_dark_mode(self):
+        qdarktheme.setup_theme()
+    def set_light_mode(self):
+        qdarktheme.setup_theme("light")
 
     def insert_data(self):
 
