@@ -1,5 +1,6 @@
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 ![Qt](https://img.shields.io/badge/Qt-%23217346.svg?style=for-the-badge&logo=Qt&logoColor=white)
+![Pandas](https://img.shields.io/badge/pandas-%23150458.svg?style=for-the-badge&logo=pandas&logoColor=white)
 # Data Management Application
 
 This is a Python application built with PyQt5 that allows users to manage data in an Excel file. The application provides a graphical user interface (GUI) where users can insert, update, and delete data in the Excel file. It also supports different themes, such as dark mode and light mode, to enhance the user experience.
@@ -30,3 +31,17 @@ python main.py
 
 * The application currently supports only Excel files (.xlsx, .xls) for data storage. Other file formats are not supported.
 * The input validation is limited to checking the name for letters only and the age for positive values. Additional validation or constraints can be added as per the specific requirements.
+
+# License
+This project is licensed under the _MIT License_.
+
+Feel free to contribute, report issues, or provide suggestions for improvement.
+
+# Acknowledgements
+
+This application was built using the following libraries:
+* PyQt5: A Python binding for the Qt framework, used for creating the GUI.
+* openpyxl: A library for reading and writing Excel files, used for data management.
+* pandas: A powerful data manipulation library, used for loading data from Excel files.
+* qdarktheme: A library for applying dark themes to PyQt5 applications.
+Special thanks to the developers of these libraries for their contributions.
